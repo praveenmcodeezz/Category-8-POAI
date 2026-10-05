@@ -1,11 +1,7 @@
-# ============================================================
 # CATEGORY 8 - KNOWLEDGE BASE
 # Problem 3: Industrial Manufacturing
-# ============================================================
 
-# ------------------------------------------------------------
 # KNOWLEDGE BASE - FACTS
-# ------------------------------------------------------------
 
 facts = {
     "machine_running",
@@ -15,9 +11,7 @@ facts = {
 }
 
 
-# ------------------------------------------------------------
 # KNOWLEDGE BASE - RULES
-# ------------------------------------------------------------
 
 rules = [
 
@@ -77,10 +71,7 @@ rules = [
     )
 ]
 
-
-# ------------------------------------------------------------
 # FORWARD CHAINING
-# ------------------------------------------------------------
 
 def forward_chaining(initial_facts, rules):
 
@@ -96,11 +87,8 @@ def forward_chaining(initial_facts, rules):
 
         for conditions, conclusion in rules:
 
-            # Check whether all conditions required by
-            # the rule are available.
+        
             if conditions.issubset(known_facts):
-
-                # Do not repeatedly add the same fact.
                 if conclusion not in known_facts:
 
                     print(
@@ -116,10 +104,7 @@ def forward_chaining(initial_facts, rules):
 
     return known_facts
 
-
-# ------------------------------------------------------------
 # BACKWARD CHAINING
-# ------------------------------------------------------------
 
 def backward_chaining(goal, facts, rules, visited=None):
 
@@ -127,9 +112,6 @@ def backward_chaining(goal, facts, rules, visited=None):
         visited = set()
 
     print("Checking goal:", goal)
-
-    # If the goal is directly available as a fact,
-    # it is already proven.
     if goal in facts:
 
         print(
@@ -140,13 +122,10 @@ def backward_chaining(goal, facts, rules, visited=None):
 
         return True
 
-    # Avoid infinite recursion.
     if goal in visited:
         return False
 
     visited.add(goal)
-
-    # Find a rule that can produce our goal.
     for conditions, conclusion in rules:
 
         if conclusion == goal:
@@ -157,9 +136,6 @@ def backward_chaining(goal, facts, rules, visited=None):
                 "->",
                 conclusion
             )
-
-            # Assume the rule can prove the goal
-            # until one of its conditions fails.
             possible = True
 
             for condition in conditions:
@@ -191,10 +167,7 @@ def backward_chaining(goal, facts, rules, visited=None):
     return False
 
 
-# ------------------------------------------------------------
 # MAIN PROGRAM
-# ------------------------------------------------------------
-
 print("==========================================")
 print("       INDUSTRIAL MANUFACTURING SYSTEM")
 print("==========================================")
