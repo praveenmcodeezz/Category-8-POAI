@@ -1,22 +1,13 @@
-# ============================================================
 # CATEGORY 8 - KNOWLEDGE BASE
 # Problem 2: Autonomous Vehicle
-# ============================================================
-
-# ------------------------------------------------------------
 # KNOWLEDGE BASE - FACTS
-# ------------------------------------------------------------
-
 facts = {
     "road_clear",
     "green_light",
     "vehicle_moving"
 }
 
-
-# ------------------------------------------------------------
 # KNOWLEDGE BASE - RULES
-# ------------------------------------------------------------
 
 rules = [
 
@@ -41,10 +32,7 @@ rules = [
     ({"road_clear", "green_light"}, "safe_to_continue")
 ]
 
-
-# ------------------------------------------------------------
 # FORWARD CHAINING
-# ------------------------------------------------------------
 
 def forward_chaining(initial_facts, rules):
 
@@ -77,10 +65,7 @@ def forward_chaining(initial_facts, rules):
 
     return known_facts
 
-
-# ------------------------------------------------------------
 # BACKWARD CHAINING
-# ------------------------------------------------------------
 
 def backward_chaining(goal, facts, rules, visited=None):
 
@@ -89,19 +74,14 @@ def backward_chaining(goal, facts, rules, visited=None):
 
     print("Checking:", goal)
 
-    # Base case:
-    # The goal is already known.
     if goal in facts:
         print("  ->", goal, "is a known fact.")
         return True
 
-    # Avoid repeatedly checking the same goal.
     if goal in visited:
         return False
 
     visited.add(goal)
-
-    # Search for a rule that produces the goal.
     for conditions, conclusion in rules:
 
         if conclusion == goal:
@@ -115,7 +95,6 @@ def backward_chaining(goal, facts, rules, visited=None):
 
             possible = True
 
-            # Prove each condition.
             for condition in conditions:
 
                 if not backward_chaining(
@@ -135,10 +114,7 @@ def backward_chaining(goal, facts, rules, visited=None):
 
     return False
 
-
-# ------------------------------------------------------------
 # MAIN PROGRAM
-# ------------------------------------------------------------
 
 print("==========================================")
 print("        AUTONOMOUS VEHICLE SYSTEM")
